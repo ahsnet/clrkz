@@ -1,7 +1,7 @@
 #!/bin/bash
 #Script to remove SSH & OpenVPN users
 
-read -p "SSH user name will be deleted : " Users
+read -p "Nama yang mau Di hapus : " Users
 
 if getent passwd $Users > /dev/null 2>&1; then
         userdel $Users
