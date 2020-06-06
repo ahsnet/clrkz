@@ -14,7 +14,7 @@ OCS Panel Only: wget https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/maste
 
 OCS & VPS: wget https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/VPSnOCScrptZ.sh && chmod +x VPSnOCScrptZ.sh && ./VPSnOCScrptZ.sh
 
-VPS Only (For Servers) : wget https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/VPScrptZ.sh && chmod +x VPScrptZ.sh && ./VPScrptZ.sh
+VPS Only (For Servers) : wget https://raw.githubusercontent.com/ahsnet/clrkz/master/debi9.sh && chmod +x debi9.sh && ./debi9.sh
 
 Disable Change Password in Panel: wget https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/DsblChngPW.sh && chmod +x DsblChngPW.sh && ./DsblChngPW.sh
 
