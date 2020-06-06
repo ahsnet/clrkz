@@ -6,20 +6,7 @@
 # ==================================================
 
 MYIP=$(wget -qO- ipv4.icanhazip.com);
-: '
-# check registered ip
-wget -q -O daftarip http://188.166.215.119:85/ocs/ip.txt
-if ! grep -w -q $MYIP daftarip; then
-	echo "Sorry, only registered IPs can use this script!"
-	if [[ $vps = "vps" ]]; then
-		echo "Powered by Clrkz"
-	else
-		echo "Powered by Clrkz"
-	fi
-	rm -f /root/daftarip
-	exit
-fi
-'
+
 # initialisasi var
 export DEBIAN_FRONTEND=noninteractive
 OS=`uname -m`;
@@ -28,12 +15,12 @@ MYIP2="s/xxxxxxxxx/$MYIP/g";
 
 #detail nama perusahaan
 country=ID
-state=Manila
-locality=Manila
-organization=ByteHAX
+state=Jawa Timur
+locality=Jombang
+organization=AHSNET
 organizationalunit=IT
-commonname=bytehax.blogspot.com
-email=143Clarkz@gmail.com
+commonname=AHSNET
+email=ahsjombang@gmail.com
 
 # go to root
 cd
@@ -46,14 +33,14 @@ sed -i '$ i\echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6' /etc/rc.local
 apt-get update;apt-get -y install wget curl;
 
 # set time GMT +7
-ln -fs /usr/share/zoneinfo/Asia/Manila /etc/localtime
+ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
 
 # set locale
 sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 service ssh restart
 
 # set repo
-wget -O /etc/apt/sources.list "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/sources.list.debian7"
+wget -O /etc/apt/sources.list "https://raw.githubusercontent.com/ahsnet/clrkz/master/sources.list.debian9"
 wget "http://www.dotdeb.org/dotdeb.gpg"
 cat dotdeb.gpg | apt-key add -;rm dotdeb.gpg
 sh -c 'echo "deb http://download.webmin.com/download/repository sarge contrib" > /etc/apt/sources.list.d/webmin.list'
@@ -68,26 +55,6 @@ apt-get -y install nginx
 # install essential package
 apt-get -y install nano iptables dnsutils openvpn screen whois ngrep unzip unrar
 
-echo "clear" >> .bashrc
-echo 'echo -e "      # ###       ###                  /"' >> .bashrc
-echo 'echo -e "    /  /###  /     ###               #/"' >> .bashrc
-echo 'echo -e "   /  /  ###/       ##               ##"' >> .bashrc
-echo 'echo -e "  /  ##   ##        ##               ##"' >> .bashrc
-echo 'echo -e " /  ###             ##               ##"' >> .bashrc
-echo 'echo -e "##   ##             ##  ###  /###    ##  /##   ######"' >> .bashrc
-echo 'echo -e "##   ##             ##   ###/ #### / ## / ### /#######"' >> .bashrc
-echo 'echo -e "##   ##             ##    ##   ###/  ##/   / /      ##"' >> .bashrc
-echo 'echo -e "##   ##             ##    ##         ##   /         /"' >> .bashrc
-echo 'echo -e "##   ##             ##    ##         ##  /         /"' >> .bashrc
-echo 'echo -e " ##  ##             ##    ##         ## ##        ###"' >> .bashrc
-echo 'echo -e "  ## #      /       ##    ##         ######        ###"' >> .bashrc
-echo 'echo -e "   ###     /        ##    ##         ##  ###        ###"' >> .bashrc
-echo 'echo -e "    ######/         ### / ###        ##   ### /      ##"' >> .bashrc
-echo 'echo -e "      ###            ##/   ###        ##   ##/       ##"' >> .bashrc
-echo 'echo -e "                                                     /"' >> .bashrc
-echo 'echo -e "                                                    /"' >> .bashrc
-echo 'echo -e "                                                   /"' >> .bashrc
-echo 'echo -e "                                                  /"' >> .bashrc
 echo 'echo -e "welcome to the server $HOSTNAME" | lolcat' >> .bashrc
 echo 'echo -e "Script mod by Clrkz"' >> .bashrc
 echo 'echo -e "Type menu to display a list of commands"' >> .bashrc
@@ -97,17 +64,17 @@ echo 'echo -e ""' >> .bashrc
 cd
 rm /etc/nginx/sites-enabled/default
 rm /etc/nginx/sites-available/default
-wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/nginx.conf"
+wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/ahsnet/clrkz/master/nginx.conf"
 mkdir -p /home/vps/public_html
 echo "<pre>Setup by Clrkz</pre>" > /home/vps/public_html/index.html
-wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/vps.conf"
+wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/ahsnet/clrkz/master/vps.conf"
 service nginx restart
 
 # install openvpn
-wget -O /etc/openvpn/openvpn.tar "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/openvpn-debian.tar"
+wget -O /etc/openvpn/openvpn.tar "https://raw.githubusercontent.com/ahsnet/clrkz/master/openvpn-debian.tar"
 cd /etc/openvpn/
 tar xf openvpn.tar
-wget -O /etc/openvpn/1194.conf "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/1194.conf"
+wget -O /etc/openvpn/1194.conf "https://raw.githubusercontent.com/ahsnet/clrkz/master/1194.conf"
 service openvpn restart
 sysctl -w net.ipv4.ip_forward=1
 sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
@@ -119,18 +86,20 @@ service openvpn restart
 
 # konfigurasi openvpn
 cd /etc/openvpn/
-wget -O /etc/openvpn/client.ovpn "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/client-1194.conf"
+wget -O /etc/openvpn/client.ovpn "https://raw.githubusercontent.com/ahsnet/clrkz/master/client-1194.conf"
 sed -i $MYIP2 /etc/openvpn/client.ovpn;
 cp client.ovpn /home/vps/public_html/
 
 # install badvpn
 cd
-wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/badvpn-udpgw"
+wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/ahsnet/clrkz/master/badvpn-udpgw"
 if [ "$OS" == "x86_64" ]; then
-  wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/badvpn-udpgw64"
+  wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/ahsnet/clrkz/master/badvpn-udpgw64"
 fi
+sed -i '$ i\screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200' /etc/rc.local
 sed -i '$ i\screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300' /etc/rc.local
 chmod +x /usr/bin/badvpn-udpgw
+screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200
 screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300
 
 # setting port ssh
@@ -142,8 +111,8 @@ service ssh restart
 # install dropbear
 apt-get -y install dropbear
 sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=3128/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 143"/g' /etc/default/dropbear
+sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=109/g' /etc/default/dropbear
+sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 110"/g' /etc/default/dropbear
 echo "/bin/false" >> /etc/shells
 echo "/usr/sbin/nologin" >> /etc/shells
 service ssh restart
@@ -152,7 +121,7 @@ service dropbear restart
 # install squid3
 cd
 apt-get -y install squid3
-wget -O /etc/squid3/squid.conf "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/squid3.conf"
+wget -O /etc/squid3/squid.conf "https://raw.githubusercontent.com/ahsnet/clrkz/master/squid3.conf"
 sed -i $MYIP2 /etc/squid3/squid.conf;
 service squid3 restart
 
@@ -174,7 +143,7 @@ socket = r:TCP_NODELAY=1
 
 [dropbear]
 accept = 443
-connect = 127.0.0.1:3128
+connect = 127.0.0.1:109
 
 END
 
@@ -198,14 +167,14 @@ service fail2ban restart
 # install ddos deflate
 cd
 apt-get -y install dnsutils dsniff
-wget https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/ddos-deflate-master.zip 
+wget https://raw.githubusercontent.com/ahsnet/clrkz/master/ddos-deflate-master.zip 
 unzip ddos-deflate-master.zip
 cd ddos-deflate-master
 ./install.sh
 rm -rf /root/ddos-deflate-master.zip 
 
 # bannerrm /etc/issue.net
-wget -O /etc/issue.net "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/issue.net"
+wget -O /etc/issue.net "https://raw.githubusercontent.com/ahsnet/clrkz/master/issue.net"
 sed -i 's@#Banner@Banner@g' /etc/ssh/sshd_config
 sed -i 's@DROPBEAR_BANNER=""@DROPBEAR_BANNER="/etc/issue.net"@g' /etc/default/dropbear
 service ssh restart
@@ -217,16 +186,16 @@ apt-get -y --force-yes -f install libxml-parser-perl
 
 # download script
 cd /usr/bin
-wget -O menu "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/menu.sh"
-wget -O usernew "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/usernew.sh"
-wget -O trial "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/trial.sh"
-wget -O delete "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/hapus.sh"
-wget -O check "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/user-login.sh"
-wget -O member "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/user-list.sh"
-wget -O restart "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/resvis.sh"
-wget -O speedtest "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/speedtest_cli.py"
-wget -O info "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/info.sh"
-wget -O about "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/about.sh"
+wget -O menu "https://raw.githubusercontent.com/ahsnet/clrkz/master/menu.sh"
+wget -O usernew "https://raw.githubusercontent.com/ahsnet/clrkz/master/usernew.sh"
+wget -O trial "https://raw.githubusercontent.com/ahsnet/clrkz/master/trial.sh"
+wget -O delete "https://raw.githubusercontent.com/ahsnet/clrkz/master/hapus.sh"
+wget -O cek "https://raw.githubusercontent.com/ahsnet/clrkz/master/user-login.sh"
+wget -O member "https://raw.githubusercontent.com/ahsnet/clrkz/master/user-list.sh"
+wget -O restart "https://raw.githubusercontent.com/ahsnet/clrkz/master/resvis.sh"
+wget -O speedtest "https://raw.githubusercontent.com/ahsnet/clrkz/master/speedtest_cli.py"
+wget -O info "https://raw.githubusercontent.com/ahsnet/clrkz/master/info.sh"
+wget -O about "https://raw.githubusercontent.com/ahsnet/clrkz/master/about.sh"
 
 echo "0 0 * * * root /sbin/reboot" > /etc/cron.d/reboot
 
@@ -234,7 +203,7 @@ chmod +x menu
 chmod +x usernew
 chmod +x trial
 chmod +x delete
-chmod +x check
+chmod +x cek
 chmod +x member
 chmod +x restart
 chmod +x speedtest
@@ -297,7 +266,7 @@ echo ""  | tee -a log-install.txt
 echo "Other features"  | tee -a log-install.txt
 echo "----------"  | tee -a log-install.txt
 echo "Webmin   : http://$MYIP:10000/"  | tee -a log-install.txt
-echo "Timezone : Asia/Manila (GMT +7)"  | tee -a log-install.txt
+echo "Timezone : Asia/jakarta (GMT +7)"  | tee -a log-install.txt
 echo "IPv6     : [off]"  | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
 echo "Original Script by Fornesia, Rzengineer & Fawzya"  | tee -a log-install.txt
@@ -309,4 +278,4 @@ echo "VPS AUTO REBOOT TIME HOURS 12 NIGHT"  | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
 echo "==========================================="  | tee -a log-install.txt
 cd
-rm -f /root/debian7.sh
+rm -f /root/debi9.sh
