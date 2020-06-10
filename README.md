@@ -10,7 +10,7 @@ badvpn : badvpn-udpgw port 7300
 nginx : 81
 
 # Installation
-OCS Panel Only: wget https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/OCSAutoScrptz.sh && chmod +x OCSAutoScrptz.sh && ./OCSAutoScrptz.sh
+OCS Panel Only: wget https://raw.githubusercontent.com/ahsnet/clrkz/master/ocspanel.sh && chmod +x ocspanel.sh && ./ocspanel.sh 
 
 OCS & VPS: wget https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/VPSnOCScrptZ.sh && chmod +x VPSnOCScrptZ.sh && ./VPSnOCScrptZ.sh
 
