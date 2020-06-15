@@ -97,9 +97,9 @@ service nginx restart
 
 apt-get -y install zip unzip
 cd /home/vps/public_html
-wget $source/OCS.zip
-unzip OCS.zip
-rm -f OCS.zip
+wget $source/OCS_FNS.zip
+unzip OCS_FNS.zip
+rm -f OCS_FNS.zip
 chown -R www-data:www-data /home/vps/public_html
 chmod -R g+rw /home/vps/public_html
 
