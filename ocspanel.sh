@@ -82,7 +82,7 @@ rm /etc/nginx/sites-available/default
 mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.backup 
 mv /etc/nginx/conf.d/vps.conf /etc/nginx/conf.d/vps.conf.backup 
 wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/ahsnet/aku/master/conf/nginx.conf" 
-wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/ahsnet/aku/master/conf/vps.conf" 
+wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/ahsnet/clrkz/master/vps.conf" 
 sed -i 's/cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' /etc/php5/fpm/php.ini 
 sed -i 's/listen = \/var\/run\/php5-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php5/fpm/pool.d/www.conf
 
@@ -157,6 +157,13 @@ echo "unset HISTFILE" >> /etc/profile
 chmod 755 /home/vps/public_html/config
 chmod 644 /home/vps/public_html/config/inc.php
 chmod 644 /home/vps/public_html/config/route.php
+
+# repo
+sh -c 'echo "deb http://download.webmin.com/download/repository sarge contrib" > /etc/apt/sources.list.d/webmin.list'
+wget -qO - http://www.webmin.com/jcameron-key.asc | apt-key add -
+apt-get -y install webmin
+sed -i 's/ssl=1/ssl=0/g' /etc/webmin/miniserv.conf
+service webmin restart
 
 # info
 clear
