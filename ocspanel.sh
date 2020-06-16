@@ -76,7 +76,7 @@ echo "$so1"
 chown -R mysql:mysql /var/lib/mysql/
 chmod -R 755 /var/lib/mysql/
 
-apt-get -y install nginx php5 php5-fpm php5-cli php5-mysql php5-mcrypt
+apt-get -y install nginx php5.6 php5.6-fpm php5.6-cli php5.6-mysql php5.6-mcrypt
 rm /etc/nginx/sites-enabled/default
 rm /etc/nginx/sites-available/default
 mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.backup 
@@ -91,15 +91,15 @@ mkdir -p /home/vps/public_html
 rm /home/vps/public_html/index.html
 echo "<?php phpinfo() ?>" > /home/vps/public_html/info.php
 chown -R www-data:www-data /home/vps/public_html
-chmod -R g+rw /home/vps/public_html service php5-fpm restart
+chmod -R g+rw /home/vps/public_html service php5.6-fpm restart
 service php5-fpm restart
 service nginx restart
 
 apt-get -y install zip unzip
 cd /home/vps/public_html
-wget $source/OCS_FNSR.zip
-unzip OCS_FNSR.zip
-rm -f OCS_FNSR.zip
+wget $source/OCS.zip
+unzip OCS.zip
+rm -f OCS.zip
 chown -R www-data:www-data /home/vps/public_html
 chmod -R g+rw /home/vps/public_html
 
@@ -157,13 +157,6 @@ echo "unset HISTFILE" >> /etc/profile
 chmod 755 /home/vps/public_html/config
 chmod 644 /home/vps/public_html/config/inc.php
 chmod 644 /home/vps/public_html/config/route.php
-
-# repo
-sh -c 'echo "deb http://download.webmin.com/download/repository sarge contrib" > /etc/apt/sources.list.d/webmin.list'
-wget -qO - http://www.webmin.com/jcameron-key.asc | apt-key add -
-apt-get -y install webmin
-sed -i 's/ssl=1/ssl=0/g' /etc/webmin/miniserv.conf
-service webmin restart
 
 # info
 clear
