@@ -47,7 +47,7 @@ echo "Okay, that's all I need. We are ready to setup your OCS Panels now"
 read -n1 -r -p "Press any key to continue..."
 
 #apt-get update
-apt-get update -y
+apt-get update && apt-get upgrade -y
 apt-get install build-essential expect -y
 apt-get install -y mysql-server
 
@@ -103,7 +103,7 @@ service nginx restart
 apt-get -y install zip unzip
 cd /home/vps/public_html
 wget $source/Ocs-Panel-Reborns-ocsreborn-v2.zip
-Ocs-Panel-Reborns-ocsreborn-v2.zip
+unzip Ocs-Panel-Reborns-ocsreborn-v2.zip
 rm -f Ocs-Panel-Reborns-ocsreborn-v2.zip
 chown -R www-data:www-data /home/vps/public_html
 chmod -R g+rw /home/vps/public_html
@@ -146,10 +146,10 @@ echo ""
 read -p "If you really believe the above step has been done, please Press [Enter] key to continue..."
 echo ""
 cd /root
-#wget http://www.webmin.com/jcameron-key.asc
-#apt-key add jcameron-key.asc
-#sed -i 's/ssl=1/ssl=0/g' /etc/webmin/miniserv.conf
-#service webmin restart
+wget http://www.webmin.com/jcameron-key.asc
+apt-key add jcameron-key.asc
+sed -i 's/ssl=1/ssl=0/g' /etc/webmin/miniserv.conf
+service webmin restart
 
 #rm -f /root/jcameron-key.asc
 
