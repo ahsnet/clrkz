@@ -81,30 +81,30 @@ wget -q https://packages.sury.org/php/apt.gpg -O- | apt-key add -
 echo "deb https://packages.sury.org/php/ stretch main" | tee /etc/apt/sources.list.d/php.list
 apt-get update
 apt-get upgrade
-apt-get -y install nginx php7.0 php7.0-fpm php7.0-cli php7.0-mysql php7.0-mcrypt
+apt-get -y install nginx php5 php5-fpm php5-cli php5-mysql php5-mcrypt
 rm /etc/nginx/sites-enabled/default
 rm /etc/nginx/sites-available/default
 mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.backup 
 mv /etc/nginx/conf.d/vps.conf /etc/nginx/conf.d/vps.conf.backup 
 wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/ahsnet/aku/master/conf/nginx.conf" 
 wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/ahsnet/clrkz/master/vps.conf" 
-sed -i 's/cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' /etc/php/7.0/fpm/php.ini 
-sed -i 's/listen = \/var\/run\/php7.0-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php/7.0/fpm/pool.d/www.conf
+sed -i 's/cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' /etc/php5/fpm/php.ini 
+sed -i 's/listen = \/var\/run\/php7.0-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php5/fpm/pool.d/www.conf
 
 useradd -m vps
 mkdir -p /home/vps/public_html
 rm /home/vps/public_html/index.html
 echo "<?php phpinfo() ?>" > /home/vps/public_html/info.php
 chown -R www-data:www-data /home/vps/public_html
-chmod -R g+rw /home/vps/public_html service php7.0-fpm restart
-service php7.0-fpm restart
+chmod -R g+rw /home/vps/public_html
+service php5-fpm restart
 service nginx restart
 
 apt-get -y install zip unzip
 cd /home/vps/public_html
-wget $source/OCS.zip
-unzip OCS.zip
-rm -f OCS.zip
+wget $source/Ocs-Panel-Reborns-ocsreborn-v2.zip
+Ocs-Panel-Reborns-ocsreborn-v2.zip
+rm -f Ocs-Panel-Reborns-ocsreborn-v2.zip
 chown -R www-data:www-data /home/vps/public_html
 chmod -R g+rw /home/vps/public_html
 
