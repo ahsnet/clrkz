@@ -102,9 +102,9 @@ service nginx restart
 
 apt-get -y install zip unzip
 cd /home/vps/public_html
-wget $source/Ocs-Panel-Reborns-ocsreborn-v2.zip
-unzip Ocs-Panel-Reborns-ocsreborn-v2.zip
-rm -f Ocs-Panel-Reborns-ocsreborn-v2.zip
+wget $source/OCS.zip
+unzip OCS.zip
+rm -f OCS.zip
 chown -R www-data:www-data /home/vps/public_html
 chmod -R g+rw /home/vps/public_html
 
