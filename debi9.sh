@@ -56,7 +56,7 @@ apt-get -y install nginx
 apt-get -y install nano iptables dnsutils openvpn screen whois ngrep unzip unrar
 
 echo 'echo -e "welcome to the server $HOSTNAME" | lolcat' >> .bashrc
-echo 'echo -e "Script mod by Clrkz"' >> .bashrc
+echo 'echo -e "Script mod by Ahsnet"' >> .bashrc
 echo 'echo -e "Type menu to display a list of commands"' >> .bashrc
 echo 'echo -e ""' >> .bashrc
 
@@ -66,7 +66,7 @@ rm /etc/nginx/sites-enabled/default
 rm /etc/nginx/sites-available/default
 wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/ahsnet/clrkz/master/nginx.conf"
 mkdir -p /home/vps/public_html
-echo "<pre>Setup by Clrkz</pre>" > /home/vps/public_html/index.html
+echo "<pre>www.ahsnet.xyz</pre>" > /home/vps/public_html/index.html
 wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/ahsnet/clrkz/master/vps.conf"
 service nginx restart
 
@@ -224,11 +224,6 @@ rm -rf ~/.bash_history && history -c
 echo "unset HISTFILE" >> /etc/profile
 
 # install neofetch
-echo "deb http://dl.bintray.com/dawidd6/neofetch jessie main" | tee -a /etc/apt/sources.list
-curl "https://bintray.com/user/downloadSubjectPublicKey?username=bintray"| apt-key add -
-apt-get update
-apt-get install neofetch
-
 echo "deb http://dl.bintray.com/dawidd6/neofetch jessie main" | tee -a /etc/apt/sources.list
 curl "https://bintray.com/user/downloadSubjectPublicKey?username=bintray"| apt-key add -
 apt-get update
